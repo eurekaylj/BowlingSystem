@@ -2,59 +2,42 @@ package cn.edu.ncu.bowling.systems;
 
 
 import cn.edu.ncu.bowling.entities.Participants;
-import cn.edu.ncu.bowling.jdbc.JDBC;
+import cn.edu.ncu.bowling.DAO.JDBC;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class CoachSys {
 
-    private List<Participants> CoachList;
-    private List<Participants> playersList;
-
-    private String currentId;
+    private String currentId;   //登录此系统的id
+    private List<Participants> CoachList;   //操作对象，所有Coach
+    private List<Participants> PlayerList; //操作对象，所有player
     private static CoachSys instance = null;
 
     public CoachSys(String inputId) {
-        CoachList = new ArrayList<>(); //以后改为从数据库导入
+        //从数据库导入
+        CoachList = new JDBC().fillParticipants(1);
+        new JDBC().deleteParticipants(1);
+        PlayerList = new JDBC().fillParticipants(3);
+        new JDBC().deleteParticipants(3);
+        
         setCurrentId(inputId);
         PlayerSys.getInstance();
     }
 
+    /**
+     * 程序结束前一定要执行这个，把数据放回数据库 --Eureka
+     */
+    public void updateDataBase() {
+        new JDBC().insertParticipants(CoachList);
+        new JDBC().insertParticipants(PlayerList);
+    }
 
     public static CoachSys getInstance(String inputId) {
         if (instance == null)
             instance = new CoachSys(inputId);
         return instance;
     }
-
-    /**
-     * Coach的type为1，队长为2，队员1为3
-     */
-    CoachSys() {
-        CoachList = new JDBC().fillParticipants(1); //以后改为从数据库导入--已改为从数据库导入 --Eureka
-        new JDBC().deleteParticipants(1);
-        playersList = new JDBC().fillParticipants(3);
-        new JDBC().deleteParticipants(3);
-    }
-
-    /**
-     * 程序结束前一定要执行这个 --Eureka
-     */
-    public void updateDataBase() {
-        new JDBC().insertParticipants(CoachList);
-        new JDBC().insertParticipants(playersList);
-    }
-
-    static CoachSys getInstance() {
-        if (instance == null)
-            instance = new CoachSys();
-        return instance;
-    }
-
-
-
 
     //修改密码你们自己再继续修改和完善 （狗头）
     /**
@@ -78,20 +61,18 @@ public class CoachSys {
                     //输出两次密码不一致，请重新输入
                 }
             }
-
         }else{
             //输出密码错误;
         }
 
     }
 
-
     public Participants queryById(String id){
         var coach = new Participants();
         coach.setId(id);
         var index = CoachList.indexOf(coach);
         if(index != -1)
-            return playersList.get(index);
+            return PlayerList.get(index);
         else{
             System.out.println("傻逼！输错Id了，没这个人");
             return null;//后面的重新输入环节你们自己再调整一下，实在不行默认输入的Id永远正确（狗头）
@@ -114,7 +95,7 @@ public class CoachSys {
      * @param player
      */
     public void removePlayer(Participants player){
-        playersList.remove(player);
+        PlayerList.remove(player);
     }
 
     /**
@@ -124,7 +105,7 @@ public class CoachSys {
     public void removePlayer(String id){
         var player = new Participants();
         player.setId(id);
-        playersList.remove(player);
+        PlayerList.remove(player);
     }
 
 
@@ -143,7 +124,7 @@ public class CoachSys {
     public void addPlayer(String id){
         var player = new Participants();
         player.setId(id);
-        playersList.add(player);
+        PlayerList.add(player);
     }
 
     /**
@@ -203,7 +184,7 @@ public class CoachSys {
      */
     private ArrayList<String> findPlayer(int teamNum){
         ArrayList<String> Players = new ArrayList<>();
-        for(Participants player:playersList){
+        for(Participants player:PlayerList){
 
             var playerNum = player.getTeamNum();
             if(teamNum == playerNum){

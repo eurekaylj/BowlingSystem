@@ -1,4 +1,4 @@
-package cn.edu.ncu.bowling.jdbc;
+package cn.edu.ncu.bowling.DAO;
 
 import java.io.FileReader;
 import java.io.IOException;

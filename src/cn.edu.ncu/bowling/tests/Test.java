@@ -1,7 +1,7 @@
 package cn.edu.ncu.bowling.tests;
 
 import cn.edu.ncu.bowling.entities.Participants;
-import cn.edu.ncu.bowling.jdbc.JDBC;
+import cn.edu.ncu.bowling.DAO.JDBC;
 
 import java.util.List;
 
