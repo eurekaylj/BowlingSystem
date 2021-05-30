@@ -1,1 +1,3 @@
-### 在Github上看我代码的人，除我本人意外，其他人看一次一律-1s
+### Java实验 BowlingSystem 保龄球评分系统
+Create By:\
+Xu Kai, Li Luofeng, Yao WangChen, Yi HongSheng, Eurekaylj 
