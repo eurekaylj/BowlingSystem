@@ -2,8 +2,10 @@ package cn.edu.ncu.bowling.systems;
 
 
 import cn.edu.ncu.bowling.entities.Participants;
+import cn.edu.ncu.bowling.jdbc.JDBC;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class CoachSys {
@@ -27,8 +29,22 @@ public class CoachSys {
         return instance;
     }
 
+    /**
+     * Coach的type为1，队长为2，队员1为3
+     */
     CoachSys() {
-        CoachList = new ArrayList<>(); //以后改为从数据库导入
+        CoachList = new JDBC().fillParticipants(1); //以后改为从数据库导入--已改为从数据库导入 --Eureka
+        new JDBC().deleteParticipants(1);
+        playersList = new JDBC().fillParticipants(3);
+        new JDBC().deleteParticipants(3);
+    }
+
+    /**
+     * 程序结束前一定要执行这个 --Eureka
+     */
+    public void updateDataBase() {
+        new JDBC().insertParticipants(CoachList);
+        new JDBC().insertParticipants(playersList);
     }
 
     static CoachSys getInstance() {
