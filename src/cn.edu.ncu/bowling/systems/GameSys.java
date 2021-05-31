@@ -1,5 +1,6 @@
 package cn.edu.ncu.bowling.systems;
 
+import cn.edu.ncu.bowling.DAO.JDBC;
 import cn.edu.ncu.bowling.entities.Games;
 
 
@@ -14,7 +15,7 @@ public class GameSys {
     private static GameSys instance = null;
 
     public GameSys() {
-        gamesList = new ArrayList<>(); //以后改为从数据库导入
+        gamesList = new JDBC().fillGames(); //以后改为从数据库导入
     }
 
     static GameSys getInstance() {

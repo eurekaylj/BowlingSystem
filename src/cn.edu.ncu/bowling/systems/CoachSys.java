@@ -152,11 +152,11 @@ public class CoachSys {
 
         if(findCaption(currentTeamNum) != null) {
             var oldCaption = findCaption(currentTeamNum);
-            oldCaption.setType(2); //2为队员
-            player.setType(1);
+            oldCaption.setType(3); //3为队员
+            player.setType(4);
 
         }else{
-            player.setType(1);
+            player.setType(4);
             System.out.println("提示：这个队伍没有队长,现在设好了");
         }
     }
@@ -170,7 +170,7 @@ public class CoachSys {
 
         ArrayList<String> playerId = findPlayer(teamNum);
         for(String id:playerId){
-            if(queryById(id).getType() == 1){  //我这里假设type为1的是队长
+            if(queryById(id).getType() == 4){  //我这里假设type为4的是队长
                 return queryById(id);
             }
         }

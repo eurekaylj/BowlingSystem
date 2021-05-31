@@ -18,6 +18,54 @@ public class JDBC {
      * insertParticipants：将List<Participants> list的所有数据放入数据库
      */
 
+    public List<Participants> fillParticipants() {
+        Connection conn = null;
+        Statement stmt = null;
+        ResultSet rs = null;
+        List<Participants> list = null;
+        try {
+            conn = JDBCUtils.getConnection();
+            //定义sql
+            String sql = "select * from participants";
+            //获取执行sql的对象
+            stmt = conn.createStatement();
+            //执行sql
+            rs = stmt.executeQuery(sql);
+            //遍历结果集，封装对象，装载集合
+            Participants participants = null;
+            list = new ArrayList<Participants>();
+            while (rs.next()) {
+                //获取数据
+                String name = rs.getString("name");
+                String id = rs.getString("id");
+                String password = rs.getString("password");
+                String gender = rs.getString("gender");
+                String age = rs.getString("age");
+                String address = rs.getString("address");
+                int teamNum = rs.getInt("teamNum");
+                int type = rs.getInt("type");
+                int score = rs.getInt("score");
+                //创建对象，并赋值
+                participants = new Participants();
+                participants.setName(name);
+                participants.setId(id);
+                participants.setPassword(password);
+                participants.setGender(gender);
+                participants.setAge(age);
+                participants.setAddress(address);
+                participants.setTeamNum(teamNum);
+                participants.setType(type);
+                //装载集合
+                list.add(participants);
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } finally {
+            JDBCUtils.close(rs,stmt,conn);
+        }
+        return list;
+    }
+
     public List<Participants> fillParticipants(int type1) {
         Connection conn = null;
         Statement stmt = null;
@@ -112,6 +160,24 @@ public class JDBC {
             JDBCUtils.close(rs,stmt,conn);
         }
         return list;
+    }
+
+    public void deleteParticipants() {
+        Connection conn = null;
+        Statement stmt = null;
+        try {
+            conn = JDBCUtils.getConnection();
+            //定义sql
+            String sql = "delete from participants";
+            //获取执行sql的对象
+            stmt = conn.createStatement();
+            //执行sql
+            stmt.execute(sql);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } finally {
+            JDBCUtils.close(stmt,conn);
+        }
     }
 
     public void deleteParticipants(int type) {
@@ -235,7 +301,7 @@ public class JDBC {
         return list;
     }
 
-    public void deleteGames(int type) {
+    public void deleteGames() {
         Connection conn = null;
         Statement stmt = null;
         try {

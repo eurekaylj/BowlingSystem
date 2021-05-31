@@ -1,5 +1,6 @@
 package cn.edu.ncu.bowling.systems;
 
+import cn.edu.ncu.bowling.DAO.JDBC;
 import cn.edu.ncu.bowling.entities.Games;
 import cn.edu.ncu.bowling.entities.Participants;
 
@@ -15,7 +16,7 @@ public class PlayerSys {
     private static PlayerSys instance = null;
 
     public PlayerSys(String inputId) {
-        playersList = new ArrayList<>(); //以后改为从数据库导入，根据把不同type
+        playersList = new JDBC().fillParticipants(3,4);
         setCurrentId(inputId);
     }
 
@@ -26,7 +27,7 @@ public class PlayerSys {
     }
 
     PlayerSys() {
-        playersList = new ArrayList<>(); //以后改为从数据库导入
+        playersList = playersList = new JDBC().fillParticipants(3,4);
     }
     //这连个不带参数的是为其他系统待用时写的，或者可以把这两个删了，调用有参数的时传个空值
     static PlayerSys getInstance() {

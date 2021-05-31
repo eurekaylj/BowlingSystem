@@ -1,6 +1,7 @@
 package cn.edu.ncu.bowling.systems;
 
 import cn.edu.ncu.bowling.DAO.JDBC;
+import cn.edu.ncu.bowling.DAO.Source;
 import cn.edu.ncu.bowling.entities.Games;
 import cn.edu.ncu.bowling.entities.Participants;
 
@@ -10,7 +11,6 @@ import java.util.List;
 
 public class AdministerSys {
     private List<Participants> participantsList;
-
 
     private String currentId;
     private static AdministerSys instance = null;

@@ -12,6 +12,7 @@ public class ScoreSys {
     List<Participants> players = PlayerSys.getInstance().getPlayersList();
 
     ScoreSys() {
+
     }
 
     static ScoreSys getInstance() {
