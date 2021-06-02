@@ -13,11 +13,14 @@ public class AdministerSys {
     private List<Participants> participantsList;
 
     private String currentId;
-    private static AdministerSys instance = null;
+    private static AdministerSys instance;
+    private static Source source = new Source(); //方便插入和删除集合
 
     //这个单例模式你们看看要不要改，要不要先在外面设立两个private的Sys
     public AdministerSys(String inputId) {
         participantsList = new JDBC().fillParticipants(3);
+//        participantsList = new source.getParticipantList(); 管理员中我要的是全体成员的集合
+
         setCurrentId(inputId);
         PlayerSys.getInstance();
         CoachSys.getInstance(inputId);

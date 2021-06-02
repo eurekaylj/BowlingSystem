@@ -1,6 +1,7 @@
 package cn.edu.ncu.bowling.systems;
 
 import cn.edu.ncu.bowling.DAO.JDBC;
+import cn.edu.ncu.bowling.DAO.Source;
 import cn.edu.ncu.bowling.entities.Games;
 import cn.edu.ncu.bowling.entities.Participants;
 
@@ -10,14 +11,14 @@ import java.util.List;
 public class PlayerSys {
     private List<Participants> playersList;
     private GameSys games;
-
-
     private String currentId;
-    private static PlayerSys instance = null;
+    private static PlayerSys instance ;
+    private static Source source = new Source();
 
     public PlayerSys(String inputId) {
-        playersList = new JDBC().fillParticipants(3,4);
+//        playersList = new JDBC().fillParticipants(3,4);
         setCurrentId(inputId);
+        playersList = source.getPlayerList();
     }
 
     public static PlayerSys getInstance(String inputId) {
@@ -81,12 +82,10 @@ public class PlayerSys {
 
     public void getGameInfo(String currentId){
         GameSys gameSys = GameSys.getInstance();
-        ArrayList<Games> myGame = gameSys.findGame(currentId);
+        Games myGame = gameSys.findGame(currentId);
 
-        if(!myGame.isEmpty()){
-            for(Games games:myGame){
+        if(myGame == null){
                 System.out.println(games.toString());
-            }
         }else
             System.out.println("没参加比赛");
     }

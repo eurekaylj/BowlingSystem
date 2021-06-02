@@ -1,6 +1,7 @@
 package cn.edu.ncu.bowling.systems;
 
 
+import cn.edu.ncu.bowling.DAO.Source;
 import cn.edu.ncu.bowling.entities.Participants;
 import cn.edu.ncu.bowling.DAO.JDBC;
 
@@ -12,15 +13,20 @@ public class CoachSys {
     private String currentId;   //登录此系统的id
     private List<Participants> CoachList;   //操作对象，所有Coach
     private List<Participants> PlayerList; //操作对象，所有player
-    private static CoachSys instance = null;
+    private static CoachSys instance ;
+    private static Source source = new Source(); //方便插入和删除集合
+
 
     public CoachSys(String inputId) {
         //从数据库导入
-        CoachList = new JDBC().fillParticipants(1);
-        new JDBC().deleteParticipants(1);
-        PlayerList = new JDBC().fillParticipants(3);
-        new JDBC().deleteParticipants(3);
-        
+//        CoachList = new JDBC().fillParticipants(1);
+//        new JDBC().deleteParticipants(1);
+//        PlayerList = new JDBC().fillParticipants(3);
+//        new JDBC().deleteParticipants(3); 之前的写法
+
+        CoachList = source.getCoachList();
+        PlayerList = source.getPlayerList();
+
         setCurrentId(inputId);
         PlayerSys.getInstance();
     }
@@ -29,8 +35,11 @@ public class CoachSys {
      * 程序结束前一定要执行这个，把数据放回数据库 --Eureka
      */
     public void updateDataBase() {
-        new JDBC().insertParticipants(CoachList);
-        new JDBC().insertParticipants(PlayerList);
+//        new JDBC().insertParticipants(CoachList);
+//        new JDBC().insertParticipants(PlayerList); 之前的写法
+
+        source.setCoachList(CoachList);
+        source.setPlayerList(PlayerList);
     }
 
     public static CoachSys getInstance(String inputId) {

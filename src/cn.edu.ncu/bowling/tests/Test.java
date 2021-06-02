@@ -1,5 +1,6 @@
 package cn.edu.ncu.bowling.tests;
 
+import cn.edu.ncu.bowling.DAO.Source;
 import cn.edu.ncu.bowling.entities.Participants;
 import cn.edu.ncu.bowling.DAO.JDBC;
 
@@ -12,5 +13,6 @@ public class Test {
         new JDBC().insertParticipants(list);
         System.out.println(list);
         System.out.println(list.size());
+
     }
 }

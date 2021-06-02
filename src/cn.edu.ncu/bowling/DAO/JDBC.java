@@ -44,7 +44,7 @@ public class JDBC {
                 String address = rs.getString("address");
                 int teamNum = rs.getInt("teamNum");
                 int type = rs.getInt("type");
-                int score = rs.getInt("score");
+                //int score = rs.getInt("score");
                 //创建对象，并赋值
                 participants = new Participants();
                 participants.setName(name);

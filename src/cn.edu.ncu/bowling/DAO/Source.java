@@ -50,4 +50,5 @@ public class Source {
         new JDBC().insertGames(games);//将数据填入数据库
         Source.games = games;
     }
+
 }
