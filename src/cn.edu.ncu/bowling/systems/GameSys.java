@@ -16,6 +16,7 @@ public class GameSys {
 
     public GameSys() {
         gamesList = new JDBC().fillGames(); //以后改为从数据库导入
+        new JDBC().deleteParticipants();
     }
 
     static GameSys getInstance() {

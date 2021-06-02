@@ -17,6 +17,7 @@ public class PlayerSys {
 
     public PlayerSys(String inputId) {
         playersList = new JDBC().fillParticipants(3,4);
+        new JDBC().deleteParticipants(3,4);
         setCurrentId(inputId);
     }
 

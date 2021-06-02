@@ -1,7 +1,6 @@
 package cn.edu.ncu.bowling.systems;
 
 import cn.edu.ncu.bowling.DAO.JDBC;
-import cn.edu.ncu.bowling.DAO.Source;
 import cn.edu.ncu.bowling.entities.Games;
 import cn.edu.ncu.bowling.entities.Participants;
 
@@ -17,7 +16,10 @@ public class AdministerSys {
 
     //这个单例模式你们看看要不要改，要不要先在外面设立两个private的Sys
     public AdministerSys(String inputId) {
-        participantsList = new JDBC().fillParticipants(3);
+        //记得删除和重新插入数据
+        participantsList = new JDBC().fillParticipants();
+        new JDBC().deleteParticipants();
+        //new JDBC().insertParticipants(participantsList);
         setCurrentId(inputId);
         PlayerSys.getInstance();
         CoachSys.getInstance(inputId);
