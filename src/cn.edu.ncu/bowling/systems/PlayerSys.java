@@ -1,11 +1,9 @@
 package cn.edu.ncu.bowling.systems;
 
 import cn.edu.ncu.bowling.DAO.JDBC;
-import cn.edu.ncu.bowling.DAO.Source;
 import cn.edu.ncu.bowling.entities.Games;
 import cn.edu.ncu.bowling.entities.Participants;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class PlayerSys {
@@ -13,17 +11,19 @@ public class PlayerSys {
     private GameSys games;
     private String currentId;
     private static PlayerSys instance ;
-    private static Source source = new Source();
 
     public PlayerSys(String inputId) {
-
-//        playersList = new JDBC().fillParticipants(3,4);
-
         playersList = new JDBC().fillParticipants(3,4);
         new JDBC().deleteParticipants(3,4);
 
         setCurrentId(inputId);
-        playersList = source.getPlayerList();
+    }
+
+    /**
+     * 程序结束前一定要执行这个，把数据放回数据库 --Eureka
+     */
+    public void updateDataBase() {
+        new JDBC().insertParticipants(playersList);
     }
 
     public static PlayerSys getInstance(String inputId) {
