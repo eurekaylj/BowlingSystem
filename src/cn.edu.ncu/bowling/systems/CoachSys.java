@@ -18,6 +18,7 @@ public class CoachSys {
 
 
     public CoachSys(String inputId) {
+
         //从数据库导入
 //        CoachList = new JDBC().fillParticipants(1);
 //        new JDBC().deleteParticipants(1);
@@ -26,6 +27,15 @@ public class CoachSys {
 
         CoachList = source.getCoachList();
         PlayerList = source.getPlayerList();
+
+
+        //从数据库导入，记得重新插入数据
+        //new JDBC().insertParticipants(participantsList);
+        CoachList = new JDBC().fillParticipants(1);
+        new JDBC().deleteParticipants(1);
+        PlayerList = new JDBC().fillParticipants(3);
+        new JDBC().deleteParticipants(3);
+        //PlayerList = new Source.getPlayerList();
 
         setCurrentId(inputId);
         PlayerSys.getInstance();

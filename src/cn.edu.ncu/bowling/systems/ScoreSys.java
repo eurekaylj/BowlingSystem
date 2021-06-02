@@ -14,7 +14,6 @@ public class ScoreSys {
     List<Participants> players = new Source().getPlayerList();
 
     ScoreSys() {
-
     }
 
     static ScoreSys getInstance() {

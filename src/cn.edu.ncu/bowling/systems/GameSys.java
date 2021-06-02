@@ -17,8 +17,13 @@ public class GameSys {
     private static Source source = new Source();
 
     public GameSys() {
+
 //        gamesList = new JDBC().fillGames(); //以后改为从数据库导入
         gamesList = source.getGames();
+
+        gamesList = new JDBC().fillGames(); //以后改为从数据库导入
+        new JDBC().deleteParticipants();
+
     }
 
     static GameSys getInstance() {
