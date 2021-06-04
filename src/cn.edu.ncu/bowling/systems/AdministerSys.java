@@ -51,7 +51,7 @@ public class AdministerSys {
             var newPassword1 = "请输入新密码：";
             while (true) {
                 var newPassword2 = "这里再次请输入新密码：";
-                ;
+
                 if (newPassword1.equals(newPassword2)) {
                     currentPlayer.setPassword(newPassword1);
                     break;
@@ -173,12 +173,7 @@ public class AdministerSys {
 
     }
 
-    /**
-     * 积分榜
-     */
-    public void displayScoreBoard() {
-        ScoreSys.getInstance().showScoreBoard();
-    }
+
 
     public String getCurrentId() {
         return currentId;

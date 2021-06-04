@@ -11,7 +11,7 @@ public class Participants {
     private String address;
     private int teamNum;
     private int type;
-    private int score;
+
 
     public Participants() {
     }
@@ -91,14 +91,6 @@ public class Participants {
         this.type = type;
     }
 
-    public int getScore() {
-        return score;
-    }
-
-    public void setScore(int score) {
-        this.score = score;
-    }
-
     @Override
     public String toString() {
         return "Participants{" +
@@ -132,7 +124,6 @@ public class Participants {
         System.out.println("个人信息  " +
                 "id:'" + id + '\'' +
                 " name:" + name + '\'' +
-                " password: " + password + '\'' +
                 " gender: " + gender + '\'' +
                 " age: " + age + '\'' +
                 " address: " + address + '\'' +
