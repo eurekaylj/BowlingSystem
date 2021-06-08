@@ -3,7 +3,6 @@ package cn.edu.ncu.bowling.systems;
 import cn.edu.ncu.bowling.DAO.JDBC;
 import cn.edu.ncu.bowling.entities.Games;
 
-
 import java.util.Date;
 import java.util.List;
 
@@ -30,7 +29,7 @@ public class GameSys {
     }
 
     /**
-     * 按照比赛中的队员找比赛，返回他参加过的所有比赛
+     * 按照比赛中的队员找比赛，返回他参加的比赛
      *
      * @param id 要找的队员id
      * @return
