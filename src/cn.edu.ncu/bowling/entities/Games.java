@@ -18,6 +18,8 @@ public class Games {
 
 
     public Games() {
+        this.sideScore = new ArrayList<Integer>();
+        this.Side = new ArrayList<Integer>();
     }
 
     public Games(int gameId,int type, String time, String position, ArrayList<Integer> side, ArrayList<Integer> sideScore, boolean status) throws ParseException {

@@ -114,9 +114,9 @@ public class CoachSys {
      * 添加队员
      * @param player
      */
-    public void addPlayer(Participants player){
-        CoachList.add(player);
-    }
+//    public void addPlayer(Participants player){
+//        CoachList.add(player);
+//    }
 
     /**
      * 方法重载

@@ -333,9 +333,9 @@ public class JDBC {
                 //获取数据
                 int gameID = rs.getInt("gameID");
                 int type = rs.getInt("type");
-                Date date = rs.getDate("time");
+                String date = rs.getString("time");
                 String position = rs.getString("position");
-                boolean statue = rs.getBoolean("statue");
+                Boolean statue = rs.getInt("statue") == 1;
                 int partA = rs.getInt("partA");
                 int partB = rs.getInt("partB");
                 int scoreA = rs.getInt("scoreA");
