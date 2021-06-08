@@ -25,10 +25,13 @@ public class JDBC {
         List<Participants> list = null;
         try {
             conn = JDBCUtils.getConnection();
+            //开启事务
             //定义sql
             String sql = "select * from participants";
             //获取执行sql的对象
             stmt = conn.createStatement();
+            //开启事务
+            conn.setAutoCommit(false);
             //执行sql
             rs = stmt.executeQuery(sql);
             //遍历结果集，封装对象，装载集合
@@ -44,7 +47,6 @@ public class JDBC {
                 String address = rs.getString("address");
                 int teamNum = rs.getInt("teamNum");
                 int type = rs.getInt("type");
-                //int score = rs.getInt("score");
                 //创建对象，并赋值
                 participants = new Participants();
                 participants.setName(name);
@@ -58,10 +60,20 @@ public class JDBC {
                 //装载集合
                 list.add(participants);
             }
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+            //事物提交
+            conn.commit();
+        } catch (SQLException throwable) {
+            //事物回滚
+            try {
+                if (conn != null) {
+                    conn.rollback();
+                }
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+            throwable.printStackTrace();
         } finally {
-            JDBCUtils.close(rs,stmt,conn);
+            JDBCUtils.close(rs, stmt, conn);
         }
         return list;
     }
@@ -73,8 +85,9 @@ public class JDBC {
         List<Participants> list = null;
         try {
             conn = JDBCUtils.getConnection();
+            conn.setAutoCommit(false);
             //定义sql
-            String sql = "select * from participants where type ="+type1;
+            String sql = "select * from participants where type =" + type1;
             //获取执行sql的对象
             stmt = conn.createStatement();
             //执行sql
@@ -92,7 +105,6 @@ public class JDBC {
                 String address = rs.getString("address");
                 int teamNum = rs.getInt("teamNum");
                 int type = rs.getInt("type");
-                int score = rs.getInt("score");
                 //创建对象，并赋值
                 participants = new Participants();
                 participants.setName(name);
@@ -106,23 +118,32 @@ public class JDBC {
                 //装载集合
                 list.add(participants);
             }
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+            conn.commit();
+        } catch (SQLException throwable) {
+            if (conn != null) {
+                try {
+                    conn.rollback();
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+            }
+            throwable.printStackTrace();
         } finally {
-            JDBCUtils.close(rs,stmt,conn);
+            JDBCUtils.close(rs, stmt, conn);
         }
         return list;
     }
 
-    public List<Participants> fillParticipants(int type1,int type2) {
+    public List<Participants> fillParticipants(int type1, int type2) {
         Connection conn = null;
         Statement stmt = null;
         ResultSet rs = null;
         List<Participants> list = null;
         try {
             conn = JDBCUtils.getConnection();
+            conn.setAutoCommit(false);
             //定义sql
-            String sql = "select * from participants where type = "+type1+" or type = "+type2;
+            String sql = "select * from participants where type = " + type1 + " or type = " + type2;
             //获取执行sql的对象
             stmt = conn.createStatement();
             //执行sql
@@ -140,7 +161,6 @@ public class JDBC {
                 String address = rs.getString("address");
                 int teamNum = rs.getInt("teamNum");
                 int type = rs.getInt("type");
-                int score = rs.getInt("score");
                 //创建对象，并赋值
                 participants = new Participants();
                 participants.setName(name);
@@ -154,10 +174,18 @@ public class JDBC {
                 //装载集合
                 list.add(participants);
             }
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+            conn.commit();
+        } catch (SQLException throwable) {
+            if (conn != null) {
+                try {
+                    conn.rollback();
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+            }
+            throwable.printStackTrace();
         } finally {
-            JDBCUtils.close(rs,stmt,conn);
+            JDBCUtils.close(rs, stmt, conn);
         }
         return list;
     }
@@ -167,16 +195,25 @@ public class JDBC {
         Statement stmt = null;
         try {
             conn = JDBCUtils.getConnection();
+            conn.setAutoCommit(false);
             //定义sql
             String sql = "delete from participants";
             //获取执行sql的对象
             stmt = conn.createStatement();
             //执行sql
             stmt.execute(sql);
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+            conn.commit();
+        } catch (SQLException throwable) {
+            try {
+                if (conn != null) {
+                    conn.rollback();
+                }
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+            throwable.printStackTrace();
         } finally {
-            JDBCUtils.close(stmt,conn);
+            JDBCUtils.close(stmt, conn);
         }
     }
 
@@ -185,48 +222,66 @@ public class JDBC {
         Statement stmt = null;
         try {
             conn = JDBCUtils.getConnection();
+            conn.setAutoCommit(false);
             //定义sql
-            String sql = "delete from participants where type ="+type;
+            String sql = "delete from participants where type =" + type;
             //获取执行sql的对象
             stmt = conn.createStatement();
             //执行sql
             stmt.execute(sql);
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+            conn.commit();
+        } catch (SQLException throwable) {
+            try {
+                if (conn != null) {
+                    conn.rollback();
+                }
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+            throwable.printStackTrace();
         } finally {
-            JDBCUtils.close(stmt,conn);
+            JDBCUtils.close(stmt, conn);
         }
     }
 
-    public void deleteParticipants(int type1,int type2) {
+    public void deleteParticipants(int type1, int type2) {
         Connection conn = null;
         Statement stmt = null;
         try {
             conn = JDBCUtils.getConnection();
+            conn.setAutoCommit(false);
             //定义sql
-            String sql = "delete from participants where type ="+type1+" or type = "+type2;
+            String sql = "delete from participants where type =" + type1 + " or type = " + type2;
             //获取执行sql的对象
             stmt = conn.createStatement();
             //执行sql
             stmt.execute(sql);
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+            conn.commit();
+        } catch (SQLException throwable) {
+            try {
+                if (conn != null) {
+                    conn.rollback();
+                }
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+            throwable.printStackTrace();
         } finally {
-            JDBCUtils.close(stmt,conn);
+            JDBCUtils.close(stmt, conn);
         }
     }
 
     public void insertParticipants(List<Participants> list) {
         Connection conn = null;
         PreparedStatement pstmt = null;
-        ResultSet rs = null;
         Participants par = null;
         Iterator<Participants> it = list.iterator();
         try {
             conn = JDBCUtils.getConnection();
+            conn.setAutoCommit(false);
             while (it.hasNext()) {
                 par = it.next();
-                String sql = "insert into participants values(?,?,?,?,?,?,?,?,?)";
+                String sql = "insert into participants values(?,?,?,?,?,?,?,?)";
                 pstmt = conn.prepareStatement(sql);
                 pstmt.setString(1, par.getName());
                 pstmt.setString(2, par.getId());
@@ -236,18 +291,25 @@ public class JDBC {
                 pstmt.setString(6, par.getAddress());
                 pstmt.setInt(7, par.getTeamNum());
                 pstmt.setInt(8, par.getType());
-                pstmt.setInt(9,par.getScore());
                 pstmt.execute();
             }
+            conn.commit();
         } catch (SQLException throwables) {
+            try {
+                if (conn != null) {
+                    conn.rollback();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
             throwables.printStackTrace();
         } finally {
-            JDBCUtils.close(rs,pstmt,conn);
+            JDBCUtils.close(pstmt, conn);
         }
     }
 
     /**
-     *对Games的操作
+     * 对Games的操作
      */
 
     public List<Games> fillGames() {
@@ -257,6 +319,7 @@ public class JDBC {
         List<Games> list = null;
         try {
             conn = JDBCUtils.getConnection();
+            conn.setAutoCommit(false);
             //定义sql
             String sql = "select * from games";
             //获取执行sql的对象
@@ -268,35 +331,41 @@ public class JDBC {
             list = new ArrayList<Games>();
             while (rs.next()) {
                 //获取数据
+                int gameID = rs.getInt("gameID");
                 int type = rs.getInt("type");
                 Date date = rs.getDate("time");
                 String position = rs.getString("position");
                 boolean statue = rs.getBoolean("statue");
                 int partA = rs.getInt("partA");
                 int partB = rs.getInt("partB");
-                int partC = rs.getInt("partC");
                 int scoreA = rs.getInt("scoreA");
                 int scoreB = rs.getInt("scoreB");
-                int scoreC = rs.getInt("scoreC");
                 //创建对象，并赋值
                 games = new Games();
+                games.setGameId(gameID);
                 games.setType(type);
                 games.setTime(date.toString());
                 games.setPosition(position);
                 games.getSide().add(partA);
                 games.getSide().add(partB);
-                games.getSide().add(partC);
                 games.getSideScore().add(scoreA);
                 games.getSideScore().add(scoreB);
-                games.getSideScore().add(scoreC);
                 games.setStatus(statue);
                 //装载集合
                 list.add(games);
             }
-        } catch (SQLException | ParseException throwables) {
-            throwables.printStackTrace();
+            conn.commit();
+        } catch (SQLException | ParseException throwable) {
+            try {
+                if (conn != null) {
+                    conn.rollback();
+                }
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+            throwable.printStackTrace();
         } finally {
-            JDBCUtils.close(rs,stmt,conn);
+            JDBCUtils.close(rs, stmt, conn);
         }
         return list;
     }
@@ -306,47 +375,63 @@ public class JDBC {
         Statement stmt = null;
         try {
             conn = JDBCUtils.getConnection();
+            conn.setAutoCommit(false);
             //定义sql
             String sql = "delete from games";
             //获取执行sql的对象
             stmt = conn.createStatement();
             //执行sql
             stmt.execute(sql);
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+            conn.setAutoCommit(false);
+        } catch (SQLException throwable) {
+            try {
+                if (conn != null) {
+                    conn.rollback();
+                }
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+            throwable.printStackTrace();
         } finally {
-            JDBCUtils.close(stmt,conn);
+            JDBCUtils.close(stmt, conn);
         }
     }
 
     public void insertGames(List<Games> list) {
         Connection conn = null;
         PreparedStatement pstmt = null;
-        ResultSet rs = null;
         Games par = null;
         Iterator<Games> it = list.iterator();
         try {
             conn = JDBCUtils.getConnection();
+            conn.setAutoCommit(false);
             while (it.hasNext()) {
                 par = it.next();
-                String sql = "insert into games values(?,?,?,?,?,?,?,?,?,?)";
+                String sql = "insert into games values(?,?,?,?,?,?,?,?,?)";
                 pstmt = conn.prepareStatement(sql);
-                pstmt.setInt(1, par.getType());
-                pstmt.setDate(2, (Date) par.getTime());
-                pstmt.setString(3, par.getPosition());
-                pstmt.setBoolean(4, par.isStatus());
-                pstmt.setInt(5, par.getSide().get(0));
-                pstmt.setInt(6, par.getSide().get(1));
-                pstmt.setInt(7, par.getSide().get(2));
+                pstmt.setInt(1,par.getGameId());
+                pstmt.setInt(2, par.getType());
+                pstmt.setDate(3, (Date) par.getTime());
+                pstmt.setString(4, par.getPosition());
+                pstmt.setBoolean(5, par.isStatus());
+                pstmt.setInt(6, par.getSide().get(0));
+                pstmt.setInt(7, par.getSide().get(1));
                 pstmt.setInt(8, par.getSideScore().get(0));
                 pstmt.setInt(9, par.getSideScore().get(1));
-                pstmt.setInt(10, par.getSideScore().get(2));
                 pstmt.execute();
             }
+            conn.commit();
         } catch (SQLException throwables) {
+            try {
+                if (conn != null) {
+                    conn.rollback();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
             throwables.printStackTrace();
         } finally {
-            JDBCUtils.close(rs,pstmt,conn);
+            JDBCUtils.close(pstmt, conn);
         }
     }
 

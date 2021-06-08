@@ -1,5 +1,6 @@
 package cn.edu.ncu.bowling.entities;
 
+import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -7,17 +8,20 @@ import java.util.Date;
 
 
 public class Games {
+    private int gameId;
     private int type;
     private Date time;
     private String position;
-    private ArrayList<Integer> Side;
+    private ArrayList<Integer> Side;  //就两边
     private ArrayList<Integer> sideScore;
     private boolean status;
+
 
     public Games() {
     }
 
-    public Games(int type, String time, String position, ArrayList<Integer> side, ArrayList<Integer> sideScore, boolean status) throws ParseException {
+    public Games(int gameId,int type, String time, String position, ArrayList<Integer> side, ArrayList<Integer> sideScore, boolean status) throws ParseException {
+        this.gameId = gameId;
         this.type = type;
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         this.time = sdf.parse(time);
@@ -25,6 +29,14 @@ public class Games {
         Side = side;
         this.sideScore = sideScore;
         this.status = status;
+    }
+
+    public int getGameId() {
+        return gameId;
+    }
+
+    public void setGameId(int gameId) {
+        this.gameId = gameId;
     }
 
     public int getType() {
@@ -84,8 +96,8 @@ public class Games {
                 " 比赛种类：" + type +
                 " 比赛时间：" + time +
                 " 比赛地点：" + position + '\'' +
-                " 队伍A：" + Side.get(0) + " 队伍B：" + Side.get(1) +" 队伍C：" + Side.get(2) +
-                " A队得分： " + sideScore.get(0) +" B队得分： " + sideScore.get(1) + " C队得分： " + sideScore.get(2) +
+                " 队伍A：" + Side.get(0) + " 队伍B：" + Side.get(1) +
+                " A队得分： " + sideScore.get(0) +" B队得分： " + sideScore.get(1) +
                 String.format(" 比赛状态：%s" , status ? "结束":"未结束") ;
     }
 

@@ -8,9 +8,7 @@ import java.util.List;
 public class Test {
     public static void main(String[] args) {
 
-        List<Participants> list = new JDBC().fillParticipants(3);
-        new JDBC().deleteParticipants(3);
-        new JDBC().insertParticipants(list);
+        List<Participants> list = new JDBC().fillParticipants();
         System.out.println(list);
         System.out.println(list.size());
 

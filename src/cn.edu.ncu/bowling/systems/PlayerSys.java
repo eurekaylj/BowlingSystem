@@ -10,7 +10,7 @@ public class PlayerSys {
     private List<Participants> playersList;
     private GameSys games;
     private String currentId;
-    private static PlayerSys instance ;
+    private static PlayerSys instance = null;
 
     public PlayerSys(String inputId) {
         playersList = new JDBC().fillParticipants(3,4);
@@ -33,7 +33,7 @@ public class PlayerSys {
     }
 
     PlayerSys() {
-        playersList = playersList = new JDBC().fillParticipants(3,4);
+        playersList = new JDBC().fillParticipants(3,4);
     }
     //这连个不带参数的是为其他系统待用时写的，或者可以把这两个删了，调用有参数的时传个空值
     static PlayerSys getInstance() {
@@ -55,7 +55,7 @@ public class PlayerSys {
         if( old.equals(inputPassword) ){
             var newPassword1 = "请输入新密码：";
             while(true) { //这里我想做成两次输入新密码
-                var newPassword2 = "这里再次请输入新密码：";;
+                var newPassword2 = "这里再次请输入新密码：";
                 if(newPassword1.equals(newPassword2)) {
                     currentPlayer.setPassword(newPassword1);
                     break;
@@ -104,12 +104,7 @@ public class PlayerSys {
         //修改个人信息
     }
 
-    /**
-     * 积分榜
-     */
-    public void displayScoreBoard(){
-        ScoreSys.getInstance().showScoreBoard();
-    }
+
 
     public String getCurrentId() {
         return currentId;

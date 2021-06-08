@@ -45,14 +45,14 @@ public class GameSys {
     }
 
     /**
-     * 方法重载。看老师法得赛程安排里，每场比赛时间不同，这个依据时间找比赛
+     * 方法重载。根据id 这个依据时间找比赛
      *
-     * @param date
+     * @param id
      * @return
      */
-    public Games findGame(Date date) {
+    public Games findGame(int id) { //**加了这**@#￥%，这个方法改了一下
         for (Games game : gamesList) {
-            if (game.getTime().equals(date)) {
+            if (game.getGameId() == id) {
                 return game;
             }
         }

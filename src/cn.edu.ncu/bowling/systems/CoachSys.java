@@ -12,7 +12,7 @@ public class CoachSys {
     private String currentId;   //登录此系统的id
     private List<Participants> CoachList;   //操作对象，所有Coach
     private List<Participants> PlayerList; //操作对象，所有player
-    private static CoachSys instance ;
+    private static CoachSys instance = null;
 
 
     public CoachSys(String inputId) {
@@ -53,7 +53,7 @@ public class CoachSys {
         if( old.equals(inputPassword) ){
             var newPassword1 = "请输入新密码：";
             while(true) {
-                var newPassword2 = "这里再次请输入新密码：";;
+                var newPassword2 = "这里再次请输入新密码：";
                 if(newPassword1.equals(newPassword2)) {
                     currentPlayer.setPassword(newPassword1);
                     break;
@@ -199,7 +199,7 @@ public class CoachSys {
      * 积分榜
      */
     public void displayScoreBoard(){
-        ScoreSys.getInstance().showScoreBoard();
+//        ScoreSys.getInstance().showScoreBoard();
     }
 
     public String getCurrentId() {

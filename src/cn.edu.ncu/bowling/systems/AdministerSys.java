@@ -142,13 +142,17 @@ public class AdministerSys {
     /**
      * 修改比赛成绩
      *
-     * @param date  用来找比赛
+     * @param id  用来找比赛
      * @param side  修改的那个人
      * @param score 修改后的分数
      */
-    public void changeScore(Date date, int side, int score) {
-        Games game = GameSys.getInstance().findGame(date);
-        game.setSideScore(side, score);
+    public void changeScore(int id, int side, int score) { //这个方法改了一下
+        Games result = GameSys.getInstance().findGame(id);
+        if(result != null) {
+            Games game = result;
+            game.setSideScore(side, score);
+        }else
+            System.out.println("傻逼，没有这场比赛");   //**加了这**@#￥%
     }
 
     /**
@@ -177,7 +181,7 @@ public class AdministerSys {
      * 积分榜
      */
     public void displayScoreBoard() {
-        ScoreSys.getInstance().showScoreBoard();
+        //ScoreSys.getInstance().showScoreBoard();
     }
 
     public String getCurrentId() {
