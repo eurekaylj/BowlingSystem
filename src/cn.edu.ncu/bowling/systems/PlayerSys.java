@@ -1,6 +1,8 @@
 package cn.edu.ncu.bowling.systems;
 
 import cn.edu.ncu.bowling.DAO.JDBC;
+import cn.edu.ncu.bowling.buttonController.modifyPasswordAction;
+import cn.edu.ncu.bowling.controller.LoginAction;
 import cn.edu.ncu.bowling.entities.Games;
 import cn.edu.ncu.bowling.entities.Participants;
 
@@ -11,6 +13,8 @@ public class PlayerSys {
     private GameSys games;
     private String currentId;
     private static PlayerSys instance = null;
+    LoginAction L=new LoginAction();
+    modifyPasswordAction m=new modifyPasswordAction();
 
     public PlayerSys(String inputId) {
         playersList = new JDBC().fillParticipants(3,4);
@@ -32,8 +36,10 @@ public class PlayerSys {
         return instance;
     }
 
-    PlayerSys() {
+    public PlayerSys() {
         playersList = new JDBC().fillParticipants(3,4);
+        System.out.print(new JDBC().fillParticipants());  //[]数据库无法导入
+
     }
     //这连个不带参数的是为其他系统待用时写的，或者可以把这两个删了，调用有参数的时传个空值
     static PlayerSys getInstance() {
@@ -49,26 +55,30 @@ public class PlayerSys {
      */
     public void changePassword(String currentId){
         Participants currentPlayer = queryById(currentId);
-        var old = currentPlayer.getPassword();
-        String inputPassword = "这里存放输入的密码，李洛峰（狗头）";
+        if(currentPlayer != null){
+            var old = currentPlayer.getPassword();
+            String inputPassword = L.getPassword();
+            if( old.equals(inputPassword) ){
+                var newPassword1 = m.getNewpassword();
+                while(true) { //这里我想做成两次输入新密码
+                    var newPassword2 = m.getConfirm();
+                    if(newPassword1.equals(newPassword2)) {
+                        currentPlayer.setPassword(newPassword1);
+                        break;
+                    }
+                    else{
+                        //输出两次密码不一致，请重新输入
+                        System.out.println("两次密码输入不一致！");
+                    }
+                }
 
-        if( old.equals(inputPassword) ){
-            var newPassword1 = "请输入新密码：";
-            while(true) { //这里我想做成两次输入新密码
-                var newPassword2 = "这里再次请输入新密码：";
-                if(newPassword1.equals(newPassword2)) {
-                    currentPlayer.setPassword(newPassword1);
-                    break;
-                }
-                else{
-                    //输出两次密码不一致，请重新输入
-                }
+            }else{
+                //输出密码错误;
+                System.out.println("旧密码输入错误！");
             }
 
-        }else{
-            //输出密码错误;
-        }
-
+        }else
+            System.out.println("dfsa");
     }
 
 
@@ -76,8 +86,10 @@ public class PlayerSys {
         Participants player = new Participants();
         player.setId(id);
         var index = playersList.indexOf(player);
-        if(index != -1)
+        System.out.print(playersList.toString());
+        if(index != -1) {
             return playersList.get(index);
+        }
         else{
             System.out.println("傻逼！输错Id了，没这个人");
             return null;//后面的重新输入环节你们自己再调整一下，实在不行默认输入的Id永远正确（狗头）
@@ -90,7 +102,7 @@ public class PlayerSys {
         Games myGame = gameSys.findGame(currentId);
 
         if(myGame == null){
-                System.out.println(games.toString());
+            System.out.println(games.toString());
         }else
             System.out.println("没参加比赛");
     }
@@ -114,9 +126,9 @@ public class PlayerSys {
         this.currentId = id;
     }
 
-    public List<Participants> getPlayersList(){
-        return playersList;
-    }
+//    public List<Participants> getPlayersList(){
+//        return playersList;
+//    }
 
 }
 

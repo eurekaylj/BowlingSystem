@@ -12,7 +12,7 @@ public class Test {
         List<Games> list = new JDBC().fillGames();
         System.out.println(list);
         System.out.println(list.size());
-
+        System.out.println(new JDBC().fillParticipants(3,4));
 
     }
 }

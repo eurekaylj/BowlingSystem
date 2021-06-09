@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="1000.0" maxWidth="1000.0" minHeight="0.0" minWidth="0.0" prefHeight="500.0" prefWidth="886.0" style="-fx-background-color: WHITE;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cn.edu.ncu.bowling.controller.LoginAction">
+    <children>
+        <ImageView fx:id="imView" fitHeight="310.0" fitWidth="603.0" layoutY="-141.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="231.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="33.84613037109375" AnchorPane.topAnchor="-141.0">
+            <image>
+                <Image url="@../image/loginGif.gif" />
+            </image>
+        </ImageView>
+        <TextField fx:id="idTxt" layoutX="197.0" layoutY="204.0" maxHeight="1000.0" maxWidth="1000.0" minHeight="0.0" minWidth="0.0" prefHeight="30.0" prefWidth="216.0" AnchorPane.leftAnchor="197.0" AnchorPane.rightAnchor="183.0">
+            <font>
+                <Font size="19.0" />
+            </font>
+        </TextField>
+        <PasswordField fx:id="passwordTxt" layoutX="197.0" layoutY="271.0" maxHeight="1000.0" maxWidth="1000.0" minHeight="0.0" minWidth="0.0" prefHeight="30.0" prefWidth="216.0" AnchorPane.leftAnchor="197.0" AnchorPane.rightAnchor="183.0">
+            <font>
+                <Font size="19.0" />
+            </font>
+        </PasswordField>
+        <Label layoutX="93.0" layoutY="199.0" maxHeight="1000.0" maxWidth="1000.0" minHeight="0.0" minWidth="0.0" prefHeight="39.0" prefWidth="60.0" text="账号" textFill="#031039">
+            <font>
+                <Font size="20.0" />
+            </font>
+        </Label>
+        <Label layoutX="93.0" layoutY="270.0" text="密码" textFill="#031039">
+            <font>
+                <Font size="20.0" />
+            </font>
+        </Label>
+        <Button fx:id="login" layoutX="198.0" layoutY="337.0" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" onAction="#login" prefHeight="39.0" prefWidth="216.0" style="-fx-background-color: #8cebfd;" text="登录" textFill="#183244" AnchorPane.leftAnchor="198.0" AnchorPane.rightAnchor="182.0">
+            <font>
+                <Font size="20.0" />
+            </font>
+            <cursor>
+                <Cursor fx:constant="HAND" />
+            </cursor>
+        </Button>
+        <ChoiceBox fx:id="le" layoutX="437.0" layoutY="204.0" prefHeight="27.0" prefWidth="110.0">
+            <cursor>
+                <Cursor fx:constant="HAND" />
+            </cursor>
+        </ChoiceBox>
+        <ImageView fitHeight="39.0" fitWidth="46.0" layoutX="149.0" layoutY="200.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../image/loginId.png" />
+            </image>
+        </ImageView>
+        <ImageView fitHeight="30.0" fitWidth="39.0" layoutX="154.0" layoutY="271.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../image/loginMima.png" />
+            </image>
+        </ImageView>
+    </children>
+</AnchorPane>

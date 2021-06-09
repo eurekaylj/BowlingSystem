@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="1000.0" maxWidth="1000.0" minHeight="0.0" minWidth="0.0" prefHeight="500.0" prefWidth="886.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cn.edu.ncu.bowling.controller.CoachAction">
+    <children>
+        <ImageView fitHeight="500.0" fitWidth="900.0" layoutX="-1.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="-1.0" AnchorPane.rightAnchor="-1.888916015625" AnchorPane.topAnchor="0.0">
+            <image>
+                <Image url="@../image/systemBackground.jpg" />
+            </image>
+        </ImageView>
+        <ImageView fx:id="touxiang" fitHeight="150.0" fitWidth="60.0" layoutX="41.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="441.0" AnchorPane.leftAnchor="41.0" AnchorPane.rightAnchor="785.0" AnchorPane.topAnchor="-1.0">
+            <image>
+                <Image url="@../image/systemFemale.png" />
+            </image>
+        </ImageView>
+        <ImageView fx:id="laba" fitHeight="50.0" fitWidth="50.0" layoutX="118.0" layoutY="-7.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="396.0" AnchorPane.leftAnchor="118.0" AnchorPane.rightAnchor="622.0" AnchorPane.topAnchor="-7.0">
+            <image>
+                <Image url="@../image/systemLoudspeaker.png" />
+            </image>
+        </ImageView>
+        <Label layoutX="41.0" layoutY="66.0" prefHeight="15.0" prefWidth="60.0" text="团队赛教练" textFill="#f9faf5" />
+        <Label layoutX="54.0" layoutY="86.0" text="张三" textFill="#f5f4f4" />
+        <Button fx:id="modifyPassword" layoutX="27.0" layoutY="123.0" mnemonicParsing="false" onAction="#modifyPasswordAction" prefHeight="23.0" prefWidth="78.0" text="   修改密码" textFill="#eb1731">
+            <cursor>
+                <Cursor fx:constant="HAND" />
+            </cursor></Button>
+        <Button layoutX="27.0" layoutY="422.0" mnemonicParsing="false" onAction="#exit" prefHeight="23.0" prefWidth="78.0" text="  退出登录" textFill="#eb1731">
+            <cursor>
+                <Cursor fx:constant="HAND" />
+            </cursor></Button>
+        <TableView layoutX="155.0" layoutY="66.0" prefHeight="407.0" prefWidth="451.0" AnchorPane.bottomAnchor="27.0" AnchorPane.leftAnchor="155.0" AnchorPane.rightAnchor="280.0" AnchorPane.topAnchor="66.0">
+            <columns>
+                <TableColumn prefWidth="111.20001220703125" text="比赛名" />
+                <TableColumn prefWidth="100.80006408691406" text="时间" />
+                <TableColumn prefWidth="116.0" text="地点" />
+                <TableColumn prefWidth="119.99996948242188" text="参赛队伍" />
+            </columns>
+        </TableView>
+        <!--<Button fx:id="music" layoutX="27.0" layoutY="278.0" mnemonicParsing="false" onAction="#Music" text="关闭音乐" textFill="#eb1731">
+           <cursor>
+              <Cursor fx:constant="HAND" />
+           </cursor></Button>-->
+        <Button fx:id="map" layoutX="27.0" layoutY="161.0" mnemonicParsing="false" onAction="#getmap" prefHeight="23.0" prefWidth="78.0" text="   查看地图" textFill="#eb1731">
+            <cursor>
+                <Cursor fx:constant="HAND" />
+            </cursor></Button>
+        <TableView layoutX="648.0" layoutY="66.0" prefHeight="407.0" prefWidth="216.0" AnchorPane.bottomAnchor="27.0" AnchorPane.topAnchor="66.0">
+            <columns>
+                <TableColumn prefWidth="67.20001220703125" text="名次" />
+                <TableColumn prefWidth="85.60009765625" style="Textfill: #ff0000;" text="名字" />
+                <TableColumn prefWidth="63.199951171875" text="积分" />
+            </columns>
+        </TableView>
+        <ChoiceBox fx:id="rank" layoutX="681.0" layoutY="31.0" prefWidth="150.0">
+            <cursor>
+                <Cursor fx:constant="HAND" />
+            </cursor>
+        </ChoiceBox>
+        <CheckBox fx:id="music" layoutX="17.0" layoutY="469.0" mnemonicParsing="false" text="    背景音乐" AnchorPane.bottomAnchor="14.2" AnchorPane.leftAnchor="17.0" AnchorPane.rightAnchor="784.2" AnchorPane.topAnchor="469.0">
+            <cursor>
+                <Cursor fx:constant="HAND" />
+            </cursor></CheckBox>
+        <TextField fx:id="announce" layoutX="174.0" layoutY="6.0" prefHeight="23.0" prefWidth="382.0">
+            <cursor>
+                <Cursor fx:constant="HAND" />
+            </cursor></TextField>
+        <Button layoutX="27.0" layoutY="196.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="78.0" text="   增删人员" textFill="#eb1731" />
+        <ImageView fitHeight="15.0" fitWidth="17.0" layoutX="31.0" layoutY="127.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../image/systemMima.png" />
+            </image>
+        </ImageView>
+        <ImageView fitHeight="23.0" fitWidth="24.0" layoutX="26.0" layoutY="161.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../image/systemMap.png" />
+            </image>
+        </ImageView>
+        <ImageView fitHeight="17.0" fitWidth="17.0" layoutX="30.0" layoutY="199.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../image/systemModifyMember.png" />
+            </image>
+        </ImageView>
+        <ImageView fitHeight="17.0" fitWidth="15.0" layoutX="31.0" layoutY="427.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../image/systemExit.png" />
+            </image>
+        </ImageView>
+        <ImageView fitHeight="17.0" fitWidth="23.0" layoutX="31.0" layoutY="469.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="35.0" AnchorPane.rightAnchor="838.0">
+            <image>
+                <Image url="@../image/systemMusic.png" />
+            </image>
+        </ImageView>
+        <Button layoutX="27.0" layoutY="233.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="78.0" text="   本组信息" textFill="#eb1731" />
+        <ImageView fitHeight="17.0" fitWidth="17.0" layoutX="29.0" layoutY="236.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../image/systemTeamMessge.png" />
+            </image>
+        </ImageView>
+        <Button layoutX="27.0" layoutY="269.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="78.0" text="  任命队长" textFill="#eb1731" />
+        <ImageView fitHeight="16.0" fitWidth="17.0" layoutX="29.0" layoutY="272.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../image/systemModifyLeader.png" />
+            </image>
+        </ImageView>
+        <CheckBox fx:id="myTest" layoutX="155.0" layoutY="40.0" mnemonicParsing="false" text="与我有关" />
+        <Label layoutX="35.0" layoutY="101.0" text="女" textFill="#f9faf5" />
+        <Label layoutX="78.0" layoutY="101.0" text="19岁" textFill="#f9faf5" />
+    </children>
+</AnchorPane>
